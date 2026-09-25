@@ -48,6 +48,35 @@
       margin-top: 24px;
     }
 
+    .venture-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .venture-group {
+      width: 100%;
+    }
+
+    @media (min-width: 950px) {
+      .container {
+        max-width: 1400px;
+      }
+
+      .venture-row {
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        gap:5.50rem;
+      }
+
+      .venture-group {
+        width: auto;
+        min-width: 220px;
+      }
+    }
+
     @property --pc1 { syntax: '<color>'; inherits: false; initial-value: #ff006e; }
     @property --pc2 { syntax: '<color>'; inherits: false; initial-value: #8338ec; }
     @property --pc3 { syntax: '<color>'; inherits: false; initial-value: #3a86ff; }
@@ -184,6 +213,7 @@
       font-size: 1.5rem;
       margin: 40px 0 20px;
       font-weight: 600;
+      white-space: nowrap;
     }
 
     .icons {
@@ -195,13 +225,128 @@
     }
 
     .icon img {
-      width: 80px;
-      height: 80px;
+      width: 100px;
+      height: 100px;
       transition: transform 0.2s;
+    }
+
+    @media (max-width: 949px) {
+      body {
+        padding: 28px 20px 24px;
+      }
+
+      .container {
+        margin-top: 8px;
+      }
+
+      .venture-group {
+        margin-top: 8px;
+        margin-bottom: 8px;
+      }
+
+      .venture-group h2 {
+        margin: 10px 0 8px;
+      }
+
+      .venture-group .icons {
+        margin-bottom: 8px;
+      }
+
+      .icon img {
+        width: 50px;
+        height: 50px;
+      }
+
+      .wordmark-link {
+        min-height: 50px;
+      }
+
+      .wordmark {
+        font-size: 1.1rem;
+      }
     }
 
     .icon:hover img {
       transform: scale(1.15);
+    }
+
+    .wordmark-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 80px;
+      text-decoration: none;
+      transition: opacity 0.2s ease, transform 0.2s;
+    }
+
+    .wordmark-link:hover {
+      opacity: 0.85;
+      transform: scale(1.06);
+    }
+
+    .wordmark {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 2.2rem;
+      font-weight: 600;
+      letter-spacing: 0.02rem;
+      line-height: 1.0;
+      white-space: nowrap;
+    }
+
+    .wordmark-top,
+    .wordmark-bottom {
+      display: block;
+    }
+
+    .careeros-mark .career-word {
+      color: #ab7affda;
+    }
+
+    .careeros-mark .os-mark {
+      color: #ffffff;
+    }
+
+    .accessedu-mark .access-word {
+      color: #3f8f4e;
+    }
+
+    .accessedu-mark .edu-word {
+      color: #ffffff;
+    }
+
+    .store-mark .store-word {
+      color: #ffffff;
+    }
+
+    .store-mark .bc-word {
+      color: #b3b3b3;
+    }
+
+    body.light .careeros-mark .os-mark,
+    body.light .accessedu-mark .edu-word,
+    body.light .store-mark .store-word {
+      color: #cecece;
+    }
+
+  body.light .accessedu-mark .access-word {
+    color: #3f8f4e;
+  }
+
+    body.light .store-mark .bc-word {
+      color: #222222;
+    }
+
+    @media (max-width: 949px) {
+      .wordmark {
+        font-size: 1.1rem;
+      }
+
+      .wordmark-link {
+        min-height: 50px;
+      }
     }
 
     body.light { background: #ffffff; color: #1a1a1a; }
@@ -285,42 +430,52 @@
 
     <h1 class="name"><a href="https://briancrink.com" class="name-link">Brian Crink</a></h1>
 
-    <!-- <h2>Released</h2> -->
-    <!-- <div class="icons"> -->
-    <!-- Add more icons with data-light and data-dark -->
-    <!-- </div> -->
+    <div class="venture-row">
+      <section class="venture-group">
+        <h2>Software as a Service</h2>
+        <div class="icons">
+          <a href="https://business.briancrink.com/streamline" class="icon"
+             data-light="../resources/images/icons/color/Streamline.png"
+             data-dark="../resources/images/icons/color/Streamline.png">
+            <img src="../resources/images/icons/color/Streamline.png" alt="Streamline" width="55" height="55">
+          </a>
+          <a href="https://business.briancrink.com/careeros" class="icon wordmark-link careeros-link" aria-label="CareerOS">
+            <span class="wordmark careeros-mark">
+              <span class="wordmark-top career-word">Career</span>
+              <span class="wordmark-bottom os-mark">OS</span>
+            </span>
+          </a>
+        </div>
+      </section>
 
-    <h2>In Development</h2>
-    <div class="icons">
-      <a href="https://business.briancrink.com/streamline" class="icon"
-         data-light="../resources/images/icons/color/Streamline.png"
-         data-dark="../resources/images/icons/color/Streamline.png">
-        <img src="../resources/images/icons/color/Streamline.png" alt="Streamline" width="55" height="55">
-      </a>
-      <a href="https://business.briancrink.com/careeros" class="icon"
-         data-light="../resources/images/icons/dark/instagram.png"
-         data-dark="../resources/images/icons/light/instagram.png">
-        <img src="../resources/images/icons/light/instagram.png" alt="CareerOS" width="50" height="50">
-      </a>
-    </div>
-
-    <h2>Planned</h2>
-    <div class="icons">
-      <a href="https://store.briancrink.com" class="icon"
-         data-light="../resources/images/icons/dark/store.briancrink.com.png"
-         data-dark="../resources/images/icons/light/store.briancrink.com.png">
-        <img src="../resources/images/icons/dark/store.briancrink.com.png" alt="briancrink.com" width="55" height="55">
-      </a>
-      <a href="https://business.briancrink.com/accessedu" class="icon"
-         data-light="../resources/images/icons/dark/accessedu.png"
-         data-dark="../resources/images/icons/light/accessedu.png">
-        <img src="../resources/images/icons/dark/accessedu.png" alt="AccessEdu" width="55" height="55">
-      </a>
+      <section class="venture-group">
+        <h2>Lifestyle</h2>
+        <div class="icons">
+          <a href="https://business.briancrink.com/accessedu" class="icon wordmark-link accessedu-link" aria-label="Access.Edu">
+            <span class="wordmark accessedu-mark">
+              <span class="wordmark-top access-word">Access</span>
+              <span class="wordmark-bottom edu-word">Edu</span>
+            </span>
+          </a>
           <a href="https://business.briancrink.com/tinyspace" class="icon"
-         data-light="../resources/images/icons/color/tinyspace.png"
-         data-dark="../resources/images/icons/color/tinyspace.png">
-        <img src="../resources/images/icons/color/tinyspace.png" alt="AccessEdu" width="55" height="55">
-      </a>
+             data-light="../resources/images/icons/color/tinyspace.png"
+             data-dark="../resources/images/icons/color/tinyspace.png">
+            <img src="../resources/images/icons/color/tinyspace.png" alt="Tiny Space" width="55" height="55">
+          </a>
+        </div>
+      </section>
+
+      <section class="venture-group">
+        <h2>Commerce</h2>
+        <div class="icons">
+          <a href="https://store.briancrink.com" class="icon wordmark-link store-link" aria-label="Store bc">
+            <span class="wordmark store-mark">
+              <span class="wordmark-top bc-word">briancrink.com</span>
+              <span class="wordmark-bottom store-word">Store</span>
+            </span>
+          </a>
+        </div>
+      </section>
     </div>
   </div>
 
