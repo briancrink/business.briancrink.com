@@ -335,6 +335,29 @@
       color: #222222;
     }
 
+    .streamline-mark {
+      align-items: center;
+    }
+
+    .streamline-mark img {
+      width: 68px;
+      height: 68px;
+      display: block;
+    }
+
+    .streamline-mark .streamline-word {
+      margin-top: 0.2rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.02rem;
+      color: #ffffff;
+      line-height: 1;
+    }
+
+    body.light .streamline-mark .streamline-word {
+      color: #1a1a1a;
+    }
+
     @media (max-width: 949px) {
       .wordmark {
         font-size: 1.1rem;
@@ -342,6 +365,16 @@
 
       .wordmark-link {
         min-height: 50px;
+      }
+
+      .streamline-mark img {
+        width: 32px;
+        height: 32px;
+      }
+
+      .streamline-mark .streamline-word {
+        font-size: 0.62rem;
+        margin-top: 0.12rem;
       }
     }
 
@@ -442,10 +475,14 @@
               <span class="wordmark-bottom os-mark">OS</span>
             </span>
           </a>
-          <a href="https://business.briancrink.com/streamline" class="icon"
+          <a href="https://business.briancrink.com/streamline" class="icon wordmark-link streamline-link"
              data-light="../resources/images/icons/dark/streamline.png"
-             data-dark="../resources/images/icons/light/streamline.png">
-            <img src="../resources/images/icons/color/streamline.png" alt="Streamline" width="55" height="55">
+             data-dark="../resources/images/icons/light/streamline.png"
+             aria-label="Streamline">
+            <span class="wordmark streamline-mark">
+              <img src="../resources/images/icons/color/streamline.png" alt="" width="68" height="68">
+              <span class="streamline-word">Streamline</span>
+            </span>
           </a>
         </div>
       </section>
