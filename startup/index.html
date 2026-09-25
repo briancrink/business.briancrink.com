@@ -69,7 +69,6 @@
         justify-content: center;
         align-items: flex-start;
         gap:5.50rem;
-        margin-top: 80px;
       }
 
       .venture-group {
@@ -306,11 +305,11 @@
       color: #ffffff;
     }
 
-    .learnos-mark .learn-word {
+    .accessedu-mark .access-word {
       color: #3f8f4e;
     }
 
-    .learnos-mark .os-word {
+    .accessedu-mark .edu-word {
       color: #ffffff;
     }
 
@@ -323,12 +322,12 @@
     }
 
     body.light .careeros-mark .os-mark,
-    body.light .learnos-mark .os-word,
+    body.light .accessedu-mark .edu-word,
     body.light .store-mark .store-word {
       color: #cecece;
     }
 
-  body.light .learnos-mark .learn-word {
+  body.light .accessedu-mark .access-word {
     color: #3f8f4e;
   }
 
@@ -457,6 +456,51 @@
         right: 12px;
       }
     }
+
+    .venture-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .dev-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      font-size: 0.64rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      line-height: 1.3;
+      white-space: nowrap;
+      font-family: ui-monospace, "SF Mono", Menlo, Monaco, "Courier New", monospace;
+    }
+
+    .dev-pill[data-dev="planned"] {
+      background: rgba(196, 181, 253, 0.18);
+      color: #ddd6fe;
+      border: 1px solid rgba(196, 181, 253, 0.32);
+    }
+
+    .dev-pill[data-dev="in-development"] {
+      background: rgba(125, 211, 252, 0.16);
+      color: #7dd3fc;
+      border: 1px solid rgba(125, 211, 252, 0.32);
+    }
+
+    body.light .dev-pill[data-dev="planned"] {
+      background: rgba(167, 139, 250, 0.16);
+      color: #7c3aed;
+      border-color: rgba(167, 139, 250, 0.28);
+    }
+
+    body.light .dev-pill[data-dev="in-development"] {
+      background: rgba(14, 165, 233, 0.12);
+      color: #0284c7;
+      border-color: rgba(14, 165, 233, 0.24);
+    }
   </style>
 </head>
 <body>
@@ -501,54 +545,69 @@
       <section class="venture-group">
         <h2>Software</h2>
         <div class="icons">
-          <a href="https://business.briancrink.com/learnos" class="icon wordmark-link learnos-link" aria-label="LearnOS">
-            <span class="wordmark learnos-mark">
-              <span class="wordmark-top learn-word">Learn</span>
-              <span class="wordmark-bottom os-word">OS</span>
-            </span>
-          </a>
-          <a href="https://business.briancrink.com/careeros" class="icon wordmark-link careeros-link" aria-label="CareerOS">
-            <span class="wordmark careeros-mark">
-              <span class="wordmark-top career-word">Career</span>
-              <span class="wordmark-bottom os-mark">OS</span>
-            </span>
-          </a>
-          <a href="https://business.briancrink.com/streamline" class="icon wordmark-link streamline-link"
-             data-light="../resources/images/icons/dark/streamline.png"
-             data-dark="../resources/images/icons/light/streamline.png"
-             aria-label="Streamline">
-            <span class="wordmark streamline-mark">
-              <img src="../resources/images/icons/color/streamline.png" alt="" width="68" height="68">
-              <span class="streamline-word"><span class="stream-word">Stream</span><span class="line-word">line</span></span>
-            </span>
-          </a>
+          <div class="venture-item">
+            <a href="https://business.briancrink.com/accessedu" class="icon wordmark-link accessedu-link" aria-label="Access.Edu">
+              <span class="wordmark accessedu-mark">
+                <span class="wordmark-top access-word">Learn</span>
+                <span class="wordmark-bottom edu-word">OS</span>
+              </span>
+            </a>
+            <span class="dev-pill" data-dev="planned">Planned</span>
+          </div>
+          <div class="venture-item">
+            <a href="https://business.briancrink.com/careeros" class="icon wordmark-link careeros-link" aria-label="CareerOS">
+              <span class="wordmark careeros-mark">
+                <span class="wordmark-top career-word">Career</span>
+                <span class="wordmark-bottom os-mark">OS</span>
+              </span>
+            </a>
+            <span class="dev-pill" data-dev="in-development">In Development</span>
+          </div>
+          <div class="venture-item">
+            <a href="https://business.briancrink.com/streamline" class="icon wordmark-link streamline-link"
+               data-light="../resources/images/icons/dark/streamline.png"
+               data-dark="../resources/images/icons/light/streamline.png"
+               aria-label="Streamline">
+              <span class="wordmark streamline-mark">
+                <img src="../resources/images/icons/color/streamline.png" alt="" width="68" height="68">
+                <span class="streamline-word"><span class="stream-word">Stream</span><span class="line-word">line</span></span>
+              </span>
+            </a>
+            <span class="dev-pill" data-dev="in-development">In Development</span>
+          </div>
         </div>
       </section>
 
       <section class="venture-group">
         <h2>Commerce</h2>
         <div class="icons">
-          <a href="https://store.briancrink.com" class="icon wordmark-link store-link" aria-label="Store bc">
-            <span class="wordmark store-mark">
-              <span class="wordmark-top bc-word">briancrink.com</span>
-              <span class="wordmark-bottom store-word">Store</span>
-            </span>
-          </a>
+          <div class="venture-item">
+            <a href="https://store.briancrink.com" class="icon wordmark-link store-link" aria-label="Store bc">
+              <span class="wordmark store-mark">
+                <span class="wordmark-top bc-word">briancrink.com</span>
+                <span class="wordmark-bottom store-word">Store</span>
+              </span>
+            </a>
+            <span class="dev-pill" data-dev="planned">Planned</span>
+          </div>
         </div>
       </section>
 
       <section class="venture-group">
         <h2>Lifestyle</h2>
         <div class="icons">
-          <a href="https://business.briancrink.com/tinyspace" class="icon wordmark-link tinyspace-link"
-             data-light="../resources/images/icons/color/tinyspace.png"
-             data-dark="../resources/images/icons/color/tinyspace.png"
-             aria-label="tinyspace">
-            <span class="wordmark tinyspace-mark">
-              <img src="../resources/images/icons/color/tinyspace.png" alt="" width="68" height="68">
-              <span class="tinyspace-word"><span class="tiny-word">tiny</span><span class="space-word">space</span></span>
-            </span>
-          </a>
+          <div class="venture-item">
+            <a href="https://business.briancrink.com/tinyspace" class="icon wordmark-link tinyspace-link"
+               data-light="../resources/images/icons/color/tinyspace.png"
+               data-dark="../resources/images/icons/color/tinyspace.png"
+               aria-label="tinyspace">
+              <span class="wordmark tinyspace-mark">
+                <img src="../resources/images/icons/color/tinyspace.png" alt="" width="68" height="68">
+                <span class="tinyspace-word"><span class="tiny-word">tiny</span><span class="space-word">space</span></span>
+              </span>
+            </a>
+            <span class="dev-pill" data-dev="planned">Planned</span>
+          </div>
         </div>
       </section>
     </div>
