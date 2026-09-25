@@ -249,8 +249,8 @@
       }
 
       .icon img {
-        width: 50px;
-        height: 50px;
+        width: 60px;
+        height: 60px;
       }
 
       .wordmark-link {
@@ -258,7 +258,7 @@
       }
 
       .wordmark {
-        font-size: 1.1rem;
+        font-size: 1.6rem;
       }
     }
 
@@ -345,7 +345,8 @@
       display: block;
     }
 
-    .streamline-mark .streamline-word {
+    .streamline-mark .streamline-word,
+    .tinyspace-mark .tinyspace-word {
       margin-top: 0.2rem;
       font-size: 0.95rem;
       font-weight: 600;
@@ -354,7 +355,7 @@
     }
 
     .streamline-mark .stream-word {
-      color: #ffb04a;
+      color: #EB518C;
     }
 
     .streamline-mark .line-word {
@@ -365,24 +366,53 @@
       color: #1a1a1a;
     }
 
+    .tinyspace-mark {
+      align-items: center;
+    }
+
+    .tinyspace-mark img {
+      width: 68px;
+      height: 68px;
+      display: block;
+    }
+
+    .tinyspace-mark .tiny-word {
+      color: #8fd4ff;
+    }
+
+    .tinyspace-mark .space-word {
+      color: #ffffff;
+    }
+
+    body.light .tinyspace-mark .space-word {
+      color: #1a1a1a;
+    }
+
     @media (max-width: 949px) {
       .wordmark {
-        font-size: 1.1rem;
+        font-size: 1.6rem;
       }
 
       .wordmark-link {
-        min-height: 50px;
+        min-height: 70px;
       }
 
       .streamline-mark img {
-        width: 32px;
-        height: 32px;
+        width: 46px;
+        height: 46px;
       }
 
-      .streamline-mark .streamline-word {
-        font-size: 0.62rem;
-        margin-top: 0.12rem;
+      .streamline-mark .streamline-word,
+      .tinyspace-mark .tinyspace-word {
+        font-size: 0.92rem;
+        margin-top: 0.2rem;
       }
+
+      .tinyspace-mark img {
+        width: 46px;
+        height: 46px;
+      }
+
     }
 
     body.light { background: #ffffff; color: #1a1a1a; }
@@ -509,10 +539,14 @@
       <section class="venture-group">
         <h2>Lifestyle</h2>
         <div class="icons">
-          <a href="https://business.briancrink.com/tinyspace" class="icon"
+          <a href="https://business.briancrink.com/tinyspace" class="icon wordmark-link tinyspace-link"
              data-light="../resources/images/icons/color/tinyspace.png"
-             data-dark="../resources/images/icons/color/tinyspace.png">
-            <img src="../resources/images/icons/color/tinyspace.png" alt="Tiny Space" width="55" height="55">
+             data-dark="../resources/images/icons/color/tinyspace.png"
+             aria-label="tinyspace">
+            <span class="wordmark tinyspace-mark">
+              <img src="../resources/images/icons/color/tinyspace.png" alt="" width="68" height="68">
+              <span class="tinyspace-word"><span class="tiny-word">tiny</span><span class="space-word">space</span></span>
+            </span>
           </a>
         </div>
       </section>
