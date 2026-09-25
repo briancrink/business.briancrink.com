@@ -55,6 +55,10 @@
       width: 100%;
     }
 
+    .icons-dock {
+      display: none;
+    }
+
     .venture-group {
       width: 100%;
     }
@@ -65,15 +69,56 @@
       }
 
       .venture-row {
-        flex-direction: row;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(220px, 1fr));
         justify-content: center;
-        align-items: flex-start;
-        gap:5.50rem;
+        align-items: stretch;
+        column-gap: 5.50rem;
+        row-gap: 0;
+        width: auto;
+        max-width: 100%;
+        padding: 0;
+        background: none;
+        border: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
       }
 
       .venture-group {
-        width: auto;
-        min-width: 220px;
+        display: contents;
+      }
+
+      .venture-group h2 {
+        grid-row: 1;
+        margin-bottom: 16px;
+      }
+
+      .icons-dock {
+        display: block;
+        grid-column: 1 / -1;
+        grid-row: 2;
+        border-radius: 28px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        min-height: 100%;
+      }
+
+      body.light .icons-dock {
+        background: rgba(26, 26, 26, 0.05);
+        border-color: rgba(26, 26, 26, 0.12);
+      }
+
+      .icons {
+        grid-row: 2;
+        z-index: 1;
+        background: transparent;
+        border: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        padding: 22px 12px;
+        margin-bottom: 0;
       }
     }
 
@@ -144,16 +189,12 @@
       letter-spacing: 0.08rem;
     }
 
-    .site-nav .nav-dot {
-      color: #ffffff;
-      font-weight: 400;
-      font-size: 1.0rem;
-      line-height: 1;
-      letter-spacing: 0;
-    }
-
-    body.light .site-nav .nav-dot {
-      color: #000000;
+    .site-nav-link.business {
+      color: #ffb04a;
+      -webkit-text-fill-color: #ffb04a;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.04rem;
     }
 
     .site-nav-link {
@@ -217,11 +258,24 @@
     }
 
     .icons {
+      position: relative;
       display: flex;
       justify-content: center;
+      align-items: center;
       gap: 24px;
       margin-bottom: 20px;
       flex-wrap: wrap;
+      padding: 18px 22px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    body.light .icons {
+      background: rgba(26, 26, 26, 0.05);
+      border-color: rgba(26, 26, 26, 0.12);
     }
 
     .icon img {
@@ -401,7 +455,6 @@
     <div class="site-nav">
       <p class="site-link">
         <a href="https://portal.briancrink.com" class="site-nav-link portal">Portal</a>
-        <span class="nav-dot" aria-hidden="true">•</span>
         <a href="https://site.briancrink.com/map" class="map-link" aria-label="Site map"><svg class="map-icon" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <clipPath id="mapFillPortal"><path d="M3.15 7.85 L8.85 4.55 L15.05 8.05 L20.7 4.75 L20.7 16.25 L15.05 19.55 L8.85 16.05 L3.15 19.35 Z"/></clipPath>
               <g clip-path="url(#mapFillPortal)">
@@ -425,19 +478,22 @@
               <line x1="19.545" y1="13.689" x2="22.395" y2="16.539" stroke="#e0b36a" stroke-width="1.85" stroke-linecap="round"/>
               <circle cx="16.858" cy="11.002" r="2.85" fill="rgba(90, 190, 255, 0.38)" stroke="#8b9098" stroke-width="0.82"/>
             </svg></a>
+        <a href="https://portal.briancrink.com#boss" class="site-nav-link business">Business</a>
       </p>
     </div>
 
     <h1 class="name"><a href="https://briancrink.com" class="name-link">Brian Crink</a></h1>
 
     <div class="venture-row">
+      <div class="icons-dock" aria-hidden="true"></div>
       <section class="venture-group">
         <h2>Software as a Service</h2>
         <div class="icons">
-          <a href="https://business.briancrink.com/streamline" class="icon"
-             data-light="../resources/images/icons/color/Streamline.png"
-             data-dark="../resources/images/icons/color/Streamline.png">
-            <img src="../resources/images/icons/color/Streamline.png" alt="Streamline" width="55" height="55">
+          <a href="https://business.briancrink.com/accessedu" class="icon wordmark-link accessedu-link" aria-label="Access.Edu">
+            <span class="wordmark accessedu-mark">
+              <span class="wordmark-top access-word">Learn</span>
+              <span class="wordmark-bottom edu-word">OS</span>
+            </span>
           </a>
           <a href="https://business.briancrink.com/careeros" class="icon wordmark-link careeros-link" aria-label="CareerOS">
             <span class="wordmark careeros-mark">
@@ -445,22 +501,10 @@
               <span class="wordmark-bottom os-mark">OS</span>
             </span>
           </a>
-        </div>
-      </section>
-
-      <section class="venture-group">
-        <h2>Lifestyle</h2>
-        <div class="icons">
-          <a href="https://business.briancrink.com/accessedu" class="icon wordmark-link accessedu-link" aria-label="Access.Edu">
-            <span class="wordmark accessedu-mark">
-              <span class="wordmark-top access-word">Access</span>
-              <span class="wordmark-bottom edu-word">Edu</span>
-            </span>
-          </a>
-          <a href="https://business.briancrink.com/tinyspace" class="icon"
-             data-light="../resources/images/icons/color/tinyspace.png"
-             data-dark="../resources/images/icons/color/tinyspace.png">
-            <img src="../resources/images/icons/color/tinyspace.png" alt="Tiny Space" width="55" height="55">
+          <a href="https://business.briancrink.com/streamline" class="icon"
+             data-light="../resources/images/icons/color/Streamline.png"
+             data-dark="../resources/images/icons/color/Streamline.png">
+            <img src="../resources/images/icons/color/Streamline.png" alt="Streamline" width="55" height="55">
           </a>
         </div>
       </section>
@@ -473,6 +517,17 @@
               <span class="wordmark-top bc-word">briancrink.com</span>
               <span class="wordmark-bottom store-word">Store</span>
             </span>
+          </a>
+        </div>
+      </section>
+
+      <section class="venture-group">
+        <h2>Lifestyle</h2>
+        <div class="icons">
+          <a href="https://business.briancrink.com/tinyspace" class="icon"
+             data-light="../resources/images/icons/color/tinyspace.png"
+             data-dark="../resources/images/icons/color/tinyspace.png">
+            <img src="../resources/images/icons/color/tinyspace.png" alt="Tiny Space" width="55" height="55">
           </a>
         </div>
       </section>
