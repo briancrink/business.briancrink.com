@@ -55,10 +55,6 @@
       width: 100%;
     }
 
-    .icons-dock {
-      display: none;
-    }
-
     .venture-group {
       width: 100%;
     }
@@ -69,56 +65,15 @@
       }
 
       .venture-row {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(220px, 1fr));
+        flex-direction: row;
         justify-content: center;
-        align-items: stretch;
-        column-gap: 5.50rem;
-        row-gap: 0;
-        width: auto;
-        max-width: 100%;
-        padding: 0;
-        background: none;
-        border: none;
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
+        align-items: flex-start;
+        gap:5.50rem;
       }
 
       .venture-group {
-        display: contents;
-      }
-
-      .venture-group h2 {
-        grid-row: 1;
-        margin-bottom: 16px;
-      }
-
-      .icons-dock {
-        display: block;
-        grid-column: 1 / -1;
-        grid-row: 2;
-        border-radius: 28px;
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        min-height: 100%;
-      }
-
-      body.light .icons-dock {
-        background: rgba(26, 26, 26, 0.05);
-        border-color: rgba(26, 26, 26, 0.12);
-      }
-
-      .icons {
-        grid-row: 2;
-        z-index: 1;
-        background: transparent;
-        border: none;
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-        padding: 22px 12px;
-        margin-bottom: 0;
+        width: auto;
+        min-width: 220px;
       }
     }
 
@@ -258,24 +213,11 @@
     }
 
     .icons {
-      position: relative;
       display: flex;
       justify-content: center;
-      align-items: center;
       gap: 24px;
       margin-bottom: 20px;
       flex-wrap: wrap;
-      padding: 18px 22px;
-      border-radius: 22px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-    }
-
-    body.light .icons {
-      background: rgba(26, 26, 26, 0.05);
-      border-color: rgba(26, 26, 26, 0.12);
     }
 
     .icon img {
@@ -485,7 +427,6 @@
     <h1 class="name"><a href="https://briancrink.com" class="name-link">Brian Crink</a></h1>
 
     <div class="venture-row">
-      <div class="icons-dock" aria-hidden="true"></div>
       <section class="venture-group">
         <h2>Software as a Service</h2>
         <div class="icons">
@@ -502,9 +443,9 @@
             </span>
           </a>
           <a href="https://business.briancrink.com/streamline" class="icon"
-             data-light="../resources/images/icons/color/Streamline.png"
-             data-dark="../resources/images/icons/color/Streamline.png">
-            <img src="../resources/images/icons/color/Streamline.png" alt="Streamline" width="55" height="55">
+             data-light="../resources/images/icons/dark/streamline.png"
+             data-dark="../resources/images/icons/light/streamline.png">
+            <img src="../resources/images/icons/color/streamline.png" alt="Streamline" width="55" height="55">
           </a>
         </div>
       </section>
