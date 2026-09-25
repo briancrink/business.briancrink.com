@@ -23,7 +23,7 @@
     body {
       font-family: 'Inter', system-ui, sans-serif;
       margin: 0;
-      padding: 28px 20px 20px;
+      padding: 0;
       min-height: 100vh;
       background: #000000;
       color: #ffffff;
@@ -230,7 +230,7 @@
 
     @media (max-width: 949px) {
       body {
-        padding: 28px 20px 24px;
+        padding: 0;
       }
 
       .container {
@@ -545,8 +545,46 @@
     }
 
     :root {
-      --image-y: 8px;
+      --hero-compact: 0;
+      --compact-range: 160px;
+      --image-x: -9px;
+      --image-y: 13px;
       --image-slot: 148px;
+      --tool-collapse: 138px;
+      --chrome-expanded: 420px;
+    }
+
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 30;
+      width: 100%;
+      padding: 12px 20px 0;
+      background: #000000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    body.light .header {
+      background: #ffffff;
+    }
+
+    #scroller {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: var(--chrome-expanded);
+      bottom: 0;
+      z-index: 1;
+      overflow-x: hidden;
+      overflow-y: auto;
+      overscroll-behavior-y: none;
+      -webkit-overflow-scrolling: touch;
+      padding: 0 20px 48px;
     }
 
     .hero {
@@ -565,7 +603,8 @@
       width: 160px;
       max-width: 160px;
       height: auto;
-      margin: 0 0 0 -80px;
+      margin: 0;
+      transform: translateX(calc(-50% + var(--image-x)));
       z-index: 1;
       pointer-events: none;
     }
@@ -579,7 +618,7 @@
       position: relative;
       z-index: 4;
       width: 100%;
-      padding-top: var(--image-slot);
+      padding-top: calc(var(--image-slot) - (var(--hero-compact) * var(--tool-collapse)));
     }
 
     .mode-toggle {
@@ -852,6 +891,7 @@
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.15"/><line x1="12" y1="2.4" x2="12" y2="5.1"/><line x1="12" y1="18.9" x2="12" y2="21.6"/><line x1="2.4" y1="12" x2="5.1" y2="12"/><line x1="18.9" y1="12" x2="21.6" y2="12"/><line x1="5.2" y1="5.2" x2="7.1" y2="7.1"/><line x1="16.9" y1="16.9" x2="18.8" y2="18.8"/><line x1="18.8" y1="5.2" x2="16.9" y2="7.1"/><line x1="7.1" y1="16.9" x2="5.2" y2="18.8"/></svg>
     </button>
 
+    <div class="header" id="startupHeader">
     <div class="site-nav">
       <p class="site-link">
         <a href="https://portal.briancrink.com" class="site-nav-link portal">Portal</a>
@@ -941,7 +981,9 @@
       </div>
     </div>
     <hr class="divider">
+    </div>
 
+    <div id="scroller">
     <div class="venture-row">
       <section class="venture-group" data-domain="software">
         <h2>Software</h2>
@@ -1044,6 +1086,7 @@
           </div>
         </div>
       </section>
+    </div>
     </div>
   </div>
 
@@ -1180,7 +1223,91 @@
         if (!ok) tagFilter = null;
       }
       applyFilter();
-      requestAnimationFrame(syncSlider);
+  
+    const startupHeader = document.getElementById('startupHeader');
+    const scroller = document.getElementById('scroller');
+    let lastCompact = -1;
+
+    function compactRangePx() {
+      const raw = getComputedStyle(document.documentElement).getPropertyValue('--compact-range').trim();
+      const n = parseFloat(raw);
+      return Number.isFinite(n) ? n : 160;
+    }
+
+    function syncProfileClip() {
+      const img = document.querySelector('.profile-image');
+      const toggle = document.getElementById('modeToggle');
+      if (!img || !toggle) return;
+      const ir = img.getBoundingClientRect();
+      const cut = toggle.getBoundingClientRect().bottom;
+      const fade = 28;
+      if (cut >= ir.bottom - 0.5) {
+        img.style.opacity = '1';
+        img.style.webkitMaskImage = 'none';
+        img.style.maskImage = 'none';
+        return;
+      }
+      if (cut <= ir.top + 0.5) {
+        img.style.opacity = '0';
+        img.style.webkitMaskImage = 'none';
+        img.style.maskImage = 'none';
+        return;
+      }
+      img.style.opacity = '1';
+      const solid = Math.max(0, cut - ir.top - fade);
+      const end = Math.max(0, cut - ir.top);
+      const mask = 'linear-gradient(to bottom, #000 0, #000 ' + solid + 'px, transparent ' + end + 'px, transparent 100%)';
+      img.style.webkitMaskImage = mask;
+      img.style.maskImage = mask;
+    }
+
+    function measureChrome() {
+      if (!startupHeader) return;
+      const divider = startupHeader.querySelector('.divider');
+      const edge = divider || startupHeader;
+      const h = Math.ceil(edge.getBoundingClientRect().bottom);
+      document.documentElement.style.setProperty('--chrome-expanded', Math.max(0, h) + 'px');
+    }
+
+    function scrollYNow() {
+      return scroller ? scroller.scrollTop : window.scrollY;
+    }
+
+    function syncHeroCompact() {
+      const range = Math.max(1, compactRangePx());
+      const y = scrollYNow();
+      const tval = Math.min(1, Math.max(0, y / range));
+      const rounded = tval.toFixed(4);
+      if (rounded !== lastCompact) {
+        lastCompact = rounded;
+        document.documentElement.style.setProperty('--hero-compact', rounded);
+        syncProfileClip();
+        measureChrome();
+      }
+    }
+
+    if (scroller) {
+      scroller.addEventListener('scroll', () => {
+        requestAnimationFrame(syncHeroCompact);
+      }, { passive: true });
+    }
+    if (startupHeader && scroller) {
+      startupHeader.addEventListener('wheel', (e) => {
+        scroller.scrollTop += e.deltaY;
+      }, { passive: true });
+    }
+    window.addEventListener('resize', () => {
+      measureChrome();
+      syncProfileClip();
+      if (typeof syncSlider === 'function') syncSlider();
+    });
+    measureChrome();
+    syncHeroCompact();
+    if (window.ResizeObserver && startupHeader) {
+      new ResizeObserver(() => measureChrome()).observe(startupHeader);
+    }
+
+    requestAnimationFrame(syncSlider);
     }
 
     document.querySelectorAll('.mode-toggle .toggle-option').forEach((btn) => {
