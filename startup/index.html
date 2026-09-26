@@ -349,34 +349,66 @@
       display: block;
     }
 
-    .store-link:hover {
-      opacity: 1;
+    /* Desktop (950px and up): loop only while hovering */
+    @media (min-width: 950px) {
+      .store-link:hover {
+        opacity: 1;
+      }
+
+      .store-link:hover .bc-word .bc-letter {
+        opacity: 0;
+        animation-duration: 5.2s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+      }
+
+      .store-link:hover .bc-word .bc-letter:nth-child(1) { animation-name: bcLetter1; }
+      .store-link:hover .bc-word .bc-letter:nth-child(2) { animation-name: bcLetter2; }
+      .store-link:hover .bc-word .bc-letter:nth-child(3) { animation-name: bcLetter3; }
+      .store-link:hover .bc-word .bc-letter:nth-child(4) { animation-name: bcLetter4; }
+      .store-link:hover .bc-word .bc-letter:nth-child(5) { animation-name: bcLetter5; }
+      .store-link:hover .bc-word .bc-letter:nth-child(6) { animation-name: bcLetter6; }
+      .store-link:hover .bc-word .bc-letter:nth-child(7) { animation-name: bcLetter7; }
+      .store-link:hover .bc-word .bc-letter:nth-child(8) { animation-name: bcLetter8; }
+      .store-link:hover .bc-word .bc-letter:nth-child(9) { animation-name: bcLetter9; }
+      .store-link:hover .bc-word .bc-letter:nth-child(10) { animation-name: bcLetter10; }
+      .store-link:hover .bc-word .bc-letter:nth-child(11) { animation-name: bcLetter11; }
+      .store-link:hover .bc-word .bc-letter:nth-child(12) { animation-name: bcLetter12; }
+      .store-link:hover .bc-word .bc-letter:nth-child(13) { animation-name: bcLetter13; }
+      .store-link:hover .bc-word .bc-letter:nth-child(14) { animation-name: bcLetter14; }
+
+      .store-link:hover .store-word {
+        animation: storeBloom 5.2s ease-in-out infinite;
+      }
     }
 
-    .store-link:hover .bc-word .bc-letter {
-      opacity: 0;
-      animation-duration: 5.2s;
-      animation-timing-function: ease-in-out;
-      animation-iteration-count: infinite;
-    }
+    /* Mobile (949px and below): no hover available, so loop by default */
+    @media (max-width: 949px) {
+      .store-link .bc-word .bc-letter {
+        opacity: 0;
+        animation-duration: 5.2s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+      }
 
-    .store-link:hover .bc-word .bc-letter:nth-child(1) { animation-name: bcLetter1; }
-    .store-link:hover .bc-word .bc-letter:nth-child(2) { animation-name: bcLetter2; }
-    .store-link:hover .bc-word .bc-letter:nth-child(3) { animation-name: bcLetter3; }
-    .store-link:hover .bc-word .bc-letter:nth-child(4) { animation-name: bcLetter4; }
-    .store-link:hover .bc-word .bc-letter:nth-child(5) { animation-name: bcLetter5; }
-    .store-link:hover .bc-word .bc-letter:nth-child(6) { animation-name: bcLetter6; }
-    .store-link:hover .bc-word .bc-letter:nth-child(7) { animation-name: bcLetter7; }
-    .store-link:hover .bc-word .bc-letter:nth-child(8) { animation-name: bcLetter8; }
-    .store-link:hover .bc-word .bc-letter:nth-child(9) { animation-name: bcLetter9; }
-    .store-link:hover .bc-word .bc-letter:nth-child(10) { animation-name: bcLetter10; }
-    .store-link:hover .bc-word .bc-letter:nth-child(11) { animation-name: bcLetter11; }
-    .store-link:hover .bc-word .bc-letter:nth-child(12) { animation-name: bcLetter12; }
-    .store-link:hover .bc-word .bc-letter:nth-child(13) { animation-name: bcLetter13; }
-    .store-link:hover .bc-word .bc-letter:nth-child(14) { animation-name: bcLetter14; }
+      .store-link .bc-word .bc-letter:nth-child(1) { animation-name: bcLetter1; }
+      .store-link .bc-word .bc-letter:nth-child(2) { animation-name: bcLetter2; }
+      .store-link .bc-word .bc-letter:nth-child(3) { animation-name: bcLetter3; }
+      .store-link .bc-word .bc-letter:nth-child(4) { animation-name: bcLetter4; }
+      .store-link .bc-word .bc-letter:nth-child(5) { animation-name: bcLetter5; }
+      .store-link .bc-word .bc-letter:nth-child(6) { animation-name: bcLetter6; }
+      .store-link .bc-word .bc-letter:nth-child(7) { animation-name: bcLetter7; }
+      .store-link .bc-word .bc-letter:nth-child(8) { animation-name: bcLetter8; }
+      .store-link .bc-word .bc-letter:nth-child(9) { animation-name: bcLetter9; }
+      .store-link .bc-word .bc-letter:nth-child(10) { animation-name: bcLetter10; }
+      .store-link .bc-word .bc-letter:nth-child(11) { animation-name: bcLetter11; }
+      .store-link .bc-word .bc-letter:nth-child(12) { animation-name: bcLetter12; }
+      .store-link .bc-word .bc-letter:nth-child(13) { animation-name: bcLetter13; }
+      .store-link .bc-word .bc-letter:nth-child(14) { animation-name: bcLetter14; }
 
-    .store-link:hover .store-word {
-      animation: storeBloom 5.2s ease-in-out infinite;
+      .store-link .store-word {
+        animation: storeBloom 5.2s ease-in-out infinite;
+      }
     }
 
     /* Each letter of "briancrink.com" pops in left-to-right (typewriter),
@@ -503,22 +535,36 @@
       transition: color 0.35s ease;
     }
 
-    .cafeanya-link:hover {
-      opacity: 1;
+    /* Desktop (950px and up): loop only while hovering */
+    @media (min-width: 950px) {
+      .cafeanya-link:hover {
+        opacity: 1;
+      }
+
+      .cafeanya-link:hover .cafe-word {
+        animation: cafeHue 4s ease-in-out infinite;
+      }
+
+      body.light .cafeanya-link:hover .cafe-word {
+        animation-name: cafeHueLight;
+      }
     }
 
-    .cafeanya-link:hover .cafe-word {
-      animation: cafeHue 4s ease-in-out infinite;
+    /* Mobile (949px and below): no hover available, so loop by default */
+    @media (max-width: 949px) {
+      .cafeanya-link .cafe-word {
+        animation: cafeHue 4s ease-in-out infinite;
+      }
+
+      body.light .cafeanya-link .cafe-word {
+        animation-name: cafeHueLight;
+      }
     }
 
     @keyframes cafeHue {
       0%, 8% { color: #ffb04a; }
       42%, 58% { color: #ab7affda; }
       92%, 100% { color: #ffb04a; }
-    }
-
-    body.light .cafeanya-link:hover .cafe-word {
-      animation-name: cafeHueLight;
     }
 
     @keyframes cafeHueLight {
@@ -529,8 +575,11 @@
 
     @media (prefers-reduced-motion: reduce) {
       .store-link:hover .bc-word .bc-letter,
+      .store-link .bc-word .bc-letter,
       .store-link:hover .store-word,
-      .cafeanya-link:hover .cafe-word {
+      .store-link .store-word,
+      .cafeanya-link:hover .cafe-word,
+      .cafeanya-link .cafe-word {
         animation: none;
         opacity: 1;
       }
