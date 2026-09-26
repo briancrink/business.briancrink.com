@@ -346,6 +346,138 @@
 
     .store-mark .bc-word {
       color: #b3b3b3;
+      display: block;
+    }
+
+    .store-link:hover {
+      opacity: 1;
+    }
+
+    .store-link:hover .bc-word .bc-letter {
+      opacity: 0;
+      animation-duration: 5.2s;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+    }
+
+    .store-link:hover .bc-word .bc-letter:nth-child(1) { animation-name: bcLetter1; }
+    .store-link:hover .bc-word .bc-letter:nth-child(2) { animation-name: bcLetter2; }
+    .store-link:hover .bc-word .bc-letter:nth-child(3) { animation-name: bcLetter3; }
+    .store-link:hover .bc-word .bc-letter:nth-child(4) { animation-name: bcLetter4; }
+    .store-link:hover .bc-word .bc-letter:nth-child(5) { animation-name: bcLetter5; }
+    .store-link:hover .bc-word .bc-letter:nth-child(6) { animation-name: bcLetter6; }
+    .store-link:hover .bc-word .bc-letter:nth-child(7) { animation-name: bcLetter7; }
+    .store-link:hover .bc-word .bc-letter:nth-child(8) { animation-name: bcLetter8; }
+    .store-link:hover .bc-word .bc-letter:nth-child(9) { animation-name: bcLetter9; }
+    .store-link:hover .bc-word .bc-letter:nth-child(10) { animation-name: bcLetter10; }
+    .store-link:hover .bc-word .bc-letter:nth-child(11) { animation-name: bcLetter11; }
+    .store-link:hover .bc-word .bc-letter:nth-child(12) { animation-name: bcLetter12; }
+    .store-link:hover .bc-word .bc-letter:nth-child(13) { animation-name: bcLetter13; }
+    .store-link:hover .bc-word .bc-letter:nth-child(14) { animation-name: bcLetter14; }
+
+    .store-link:hover .store-word {
+      animation: storeBloom 5.2s ease-in-out infinite;
+    }
+
+    /* Each letter of "briancrink.com" pops in left-to-right (typewriter),
+       holds, then fades out right-to-left. Timed as % of the shared 5.2s loop. */
+    @keyframes bcLetter1 {
+      0%, 1.857% { opacity: 0; }
+      1.857%, 99.143% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    @keyframes bcLetter2 {
+      0%, 3.714% { opacity: 0; }
+      3.714%, 98.286% { opacity: 1; }
+      99.143%, 100% { opacity: 0; }
+    }
+
+    @keyframes bcLetter3 {
+      0%, 5.571% { opacity: 0; }
+      5.571%, 97.429% { opacity: 1; }
+      98.286%, 100% { opacity: 0; }
+    }
+
+    @keyframes bcLetter4 {
+      0%, 7.429% { opacity: 0; }
+      7.429%, 96.571% { opacity: 1; }
+      97.429%, 100% { opacity: 0; }
+    }
+
+    @keyframes bcLetter5 {
+      0%, 9.286% { opacity: 0; }
+      9.286%, 95.714% { opacity: 1; }
+      96.571%, 100% { opacity: 0; }
+    }
+
+    @keyframes bcLetter6 {
+      0%, 11.143% { opacity: 0; }
+      11.143%, 94.857% { opacity: 1; }
+      95.714%, 100% { opacity: 0; }
+    }
+
+    @keyframes bcLetter7 {
+      0%, 13% { opacity: 0; }
+      13%, 94% { opacity: 1; }
+      94.857%, 100% { opacity: 0; }
+    }
+
+    @keyframes bcLetter8 {
+      0%, 14.857% { opacity: 0; }
+      14.857%, 93.143% { opacity: 1; }
+      94%, 100% { opacity: 0; }
+    }
+
+    @keyframes bcLetter9 {
+      0%, 16.714% { opacity: 0; }
+      16.714%, 92.286% { opacity: 1; }
+      93.143%, 100% { opacity: 0; }
+    }
+
+    @keyframes bcLetter10 {
+      0%, 18.571% { opacity: 0; }
+      18.571%, 91.429% { opacity: 1; }
+      92.286%, 100% { opacity: 0; }
+    }
+
+    @keyframes bcLetter11 {
+      0%, 20.429% { opacity: 0; }
+      20.429%, 90.571% { opacity: 1; }
+      91.429%, 100% { opacity: 0; }
+    }
+
+    @keyframes bcLetter12 {
+      0%, 22.286% { opacity: 0; }
+      22.286%, 89.714% { opacity: 1; }
+      90.571%, 100% { opacity: 0; }
+    }
+
+    @keyframes bcLetter13 {
+      0%, 24.143% { opacity: 0; }
+      24.143%, 88.857% { opacity: 1; }
+      89.714%, 100% { opacity: 0; }
+    }
+
+    @keyframes bcLetter14 {
+      0%, 26% { opacity: 0; }
+      26%, 88% { opacity: 1; }
+      88.857%, 100% { opacity: 0; }
+    }
+
+    @keyframes storeBloom {
+      0%, 24% {
+        text-shadow: none;
+        filter: brightness(1);
+      }
+      32%, 82% {
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.42), 0 0 22px rgba(255, 255, 255, 0.18);
+        filter: brightness(1.18);
+      }
+      90%, 100% {
+        text-shadow: none;
+        filter: brightness(1);
+      }
     }
 
     body.light .careeros-mark .os-mark,
@@ -368,6 +500,40 @@
 
     .cafeanya-mark .cafe-word {
       color: #b3b3b3;
+      transition: color 0.35s ease;
+    }
+
+    .cafeanya-link:hover {
+      opacity: 1;
+    }
+
+    .cafeanya-link:hover .cafe-word {
+      animation: cafeHue 4s ease-in-out infinite;
+    }
+
+    @keyframes cafeHue {
+      0%, 8% { color: #ffb04a; }
+      42%, 58% { color: #ab7affda; }
+      92%, 100% { color: #ffb04a; }
+    }
+
+    body.light .cafeanya-link:hover .cafe-word {
+      animation-name: cafeHueLight;
+    }
+
+    @keyframes cafeHueLight {
+      0%, 8% { color: #ffb04a; }
+      42%, 58% { color: #ab7aff; }
+      92%, 100% { color: #ffb04a; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .store-link:hover .bc-word .bc-letter,
+      .store-link:hover .store-word,
+      .cafeanya-link:hover .cafe-word {
+        animation: none;
+        opacity: 1;
+      }
     }
 
     .cafeanya-mark .anya-word {
@@ -1060,7 +1226,7 @@
           <div class="venture-item" data-domain="ecommerce" data-dev="planned" data-stage="pre-seed">
             <a href="https://store.briancrink.com" class="icon wordmark-link store-link" aria-label="Store bc">
               <span class="wordmark store-mark">
-                <span class="wordmark-top bc-word">briancrink.com</span>
+                <span class="wordmark-top bc-word"><span class="bc-letter">b</span><span class="bc-letter">r</span><span class="bc-letter">i</span><span class="bc-letter">a</span><span class="bc-letter">n</span><span class="bc-letter">c</span><span class="bc-letter">r</span><span class="bc-letter">i</span><span class="bc-letter">n</span><span class="bc-letter">k</span><span class="bc-letter">.</span><span class="bc-letter">c</span><span class="bc-letter">o</span><span class="bc-letter">m</span></span>
                 <span class="wordmark-bottom store-word">Store</span>
               </span>
             </a>
