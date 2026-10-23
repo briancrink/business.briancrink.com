@@ -894,8 +894,17 @@
       width: var(--slider-w, 33%);
       background: rgba(255, 255, 255, 0.18);
       border-radius: 46px;
-      transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-origin: center;
+      will-change: left, width, transform;
       z-index: 1;
+    }
+
+    /* Reduced motion: skip the jelly, keep a plain quick slide */
+    @media (prefers-reduced-motion: reduce) {
+      .toggle-slider {
+        transition: left 0.2s ease, width 0.2s ease, background 0.3s ease;
+      }
     }
 
     .mode-toggle.development .toggle-slider {
@@ -1368,11 +1377,72 @@
     };
     let tagFilter = null;
 
-    function syncSlider() {
+    const sliderEl = document.getElementById('toggleSlider');
+    const reduceMotion = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+    let jellyAnim = null;
+
+    // Damped spring, 0 -> 1 with optional overshoot (k = damping, w = frequency)
+    function spring(t, k, w) {
+      return 1 - Math.exp(-k * t) * (Math.cos(w * t) + (k / w) * Math.sin(w * t));
+    }
+
+    // Jelly slide: the leading edge races ahead and overshoots, the trailing edge
+    // lags behind (stretch), and the whole pill squashes then wobbles to rest.
+    function jellySlide(fromL, fromR, toL, toR) {
+      if (!sliderEl || !sliderEl.animate) return;
+      const movingRight = toL >= fromL;
+      const innerW = modeToggle.clientWidth;
+      const frames = [];
+      const N = 180; // ~275 samples/sec over the 650ms slide, so even 120Hz screens get fresh values every frame
+      for (let i = 0; i <= N; i++) {
+        const t = i / N;
+        const lead = spring(t, 9, 11.5);
+        const trail = spring(t, 7, 7.2);
+        let L, R;
+        if (movingRight) {
+          R = fromR + (toR - fromR) * lead;
+          L = fromL + (toL - fromL) * trail;
+        } else {
+          L = fromL + (toL - fromL) * lead;
+          R = fromR + (toR - fromR) * trail;
+        }
+        L = Math.max(0, L);
+        R = Math.min(innerW, R);
+        const squash = 0.15 * Math.sin(Math.PI * t) + 0.05 * Math.exp(-5 * t) * Math.sin(20 * t) * (1 - t);
+        frames.push({
+          left: L + 'px',
+          width: Math.max(0, R - L) + 'px',
+          transform: 'scaleY(' + (1 - squash).toFixed(4) + ')'
+        });
+      }
+      frames[N] = { left: toL + 'px', width: (toR - toL) + 'px', transform: 'scaleY(1)' };
+      jellyAnim = sliderEl.animate(frames, { duration: 650, easing: 'linear' });
+      const mine = jellyAnim;
+      mine.onfinish = mine.oncancel = () => { if (jellyAnim === mine) jellyAnim = null; };
+    }
+
+    function syncSlider(animate) {
       if (!modeToggle) return;
       const active = modeToggle.querySelector('.toggle-option.active') || viewTabs.domain;
-      modeToggle.style.setProperty('--slider-l', active.offsetLeft + 'px');
-      modeToggle.style.setProperty('--slider-w', active.offsetWidth + 'px');
+      const toL = active.offsetLeft;
+      const toW = active.offsetWidth;
+
+      let fromL = null, fromR = null;
+      if (animate === true && sliderEl && !(reduceMotion && reduceMotion.matches)) {
+        // Start from wherever the slider visually is (handles rapid switching)
+        const sr = sliderEl.getBoundingClientRect();
+        const tr = modeToggle.getBoundingClientRect();
+        fromL = sr.left - tr.left - modeToggle.clientLeft;
+        fromR = fromL + sr.width;
+      }
+
+      if (jellyAnim) { jellyAnim.cancel(); jellyAnim = null; }
+      modeToggle.style.setProperty('--slider-l', toL + 'px');
+      modeToggle.style.setProperty('--slider-w', toW + 'px');
+
+      if (fromL !== null && (Math.abs(fromL - toL) > 0.5 || Math.abs(fromR - (toL + toW)) > 0.5)) {
+        jellySlide(fromL, fromR, toL, toL + toW);
+      }
     }
 
     function syncLegendActive() {
@@ -1431,6 +1501,10 @@
         section.appendChild(icons);
         ventureRow.appendChild(section);
       });
+      // Re-measure columns for the layout that is on screen now. Cards are reused between
+      // filters, so without this they keep the --col from the previous layout and their
+      // fade-in waits on a stale stagger delay.
+      stampColumnDelays();
       syncLegendActive();
     }
 
@@ -1493,8 +1567,10 @@
         if (!ok) tagFilter = null;
       }
       applyFilter();
-      requestAnimationFrame(syncSlider);
-      if (viewReady && changed) replayViewFade();
+      const jelly = viewReady && changed;
+      requestAnimationFrame(() => syncSlider(jelly));
+      // Play the cascading fade on first load as well as on every view change
+      if (!viewReady || changed) replayViewFade();
       viewReady = true;
     }
 
