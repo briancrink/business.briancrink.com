@@ -9,7 +9,7 @@
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round'%3E%3Cg transform='rotate(45 12 12)'%3E%3Cpath d='M12 2.6c2.2 1.5 4 5.1 4 8.8v2.6L12 16.8 8 13.9v-2.5c0-3.7 1.8-7.3 4-8.8z' stroke-width='1.3'/%3E%3Ccircle cx='12' cy='8.1' r='1.35' stroke-width='1.2'/%3E%3Cpath d='M8 12.4 L4.7 16.2 L8 14.9' stroke-width='1.2'/%3E%3Cpath d='M16 12.4 L19.3 16.2 L16 14.9' stroke-width='1.2'/%3E%3Cpath d='M10.5 17 L12 20.4 L13.5 17' stroke-width='1.2'/%3E%3C/g%3E%3C/svg%3E" media="(prefers-color-scheme: dark)">
   <title>Business Startup | Brian Crink</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Varela&display=swap');
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -599,6 +599,8 @@
 
     .streamline-mark {
       align-items: center;
+      display: flex;
+      flex-direction: column;
     }
 
     .streamline-mark img {
@@ -607,25 +609,44 @@
       display: block;
     }
 
-    .streamline-mark .streamline-word,
-    .tinyspace-mark .tinyspace-word {
+    .streamline-mark .flu-name {
       margin-top: 0.2rem;
-      font-size: 0.95rem;
-      font-weight: 600;
-      letter-spacing: 0.02rem;
-      line-height: 1;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 400;
+      font-size: 1.15rem;
+      letter-spacing: 0;
+      line-height: .88;
+      white-space: nowrap;
     }
 
-    .streamline-mark .stream-word {
-      color: #EB518C;
+    .streamline-mark .flu {
+      color: rgba(255, 255, 255, .2);
+      background: linear-gradient(180deg, rgba(255, 255, 255, .35), rgba(255, 255, 255, .08));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .streamline-mark .line-word {
-      color: #ffffff;
+    .streamline-mark .event {
+      color: #22d3ee;
+      -webkit-text-fill-color: #22d3ee;
     }
 
-    body.light .streamline-mark .line-word {
-      color: #1a1a1a;
+    body.light .streamline-mark .flu {
+      color: rgba(26, 26, 26, .28);
+      background: linear-gradient(180deg, rgba(26, 26, 26, .42), rgba(26, 26, 26, .1));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .streamline-mark .streamline {
+      display: block;
+      width: 100%;
+      min-width: 92px;
+      height: 24px;
+      margin-top: 1px;
+      pointer-events: none;
     }
 
     .tinyspace-mark {
@@ -636,6 +657,14 @@
       width: 68px;
       height: 68px;
       display: block;
+    }
+
+    .tinyspace-mark .tinyspace-word {
+      margin-top: 0.2rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.02rem;
+      line-height: 1;
     }
 
     .tinyspace-mark .tiny-word {
@@ -664,7 +693,10 @@
         height: 46px;
       }
 
-      .streamline-mark .streamline-word,
+      .streamline-mark .flu-name {
+        font-size: 1rem;
+      }
+
       .tinyspace-mark .tinyspace-word {
         font-size: 0.92rem;
         margin-top: 0.2rem;
@@ -1263,10 +1295,11 @@
             <a href="https://business.briancrink.com/streamline" class="icon wordmark-link streamline-link"
                data-light="../resources/images/icons/dark/streamline.png"
                data-dark="../resources/images/icons/light/streamline.png"
-               aria-label="Streamline">
+               aria-label="flūevent">
               <span class="wordmark streamline-mark">
                 <img src="../resources/images/icons/color/streamline.png" alt="" width="68" height="68">
-                <span class="streamline-word"><span class="stream-word">Stream</span><span class="line-word">line</span></span>
+                <span class="flu-name"><span class="flu">flū</span><span class="event">event</span></span>
+                <canvas class="streamline" aria-hidden="true"></canvas>
               </span>
             </a>
             <div class="item-tags">
@@ -1694,6 +1727,72 @@
     window.addEventListener('resize', syncSlider);
     setView(viewFromHash());
     requestAnimationFrame(syncSlider);
+
+    /* Teal stream underline under flūevent — same wave and flowing dots as the brand site. */
+    (() => {
+      const TEAL = '34,211,238';
+      const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const lines = [...document.querySelectorAll('.streamline')];
+      if (!lines.length) return;
+      const state = lines.map((cv) => ({ cv, cx: cv.getContext('2d'), P: [], W: 0, H: 0, D: 1, G: null }));
+      function sizeAll() {
+        for (const s of state) {
+          s.D = Math.min(devicePixelRatio || 1, 2);
+          s.W = Math.max(92, s.cv.clientWidth || s.cv.parentElement.getBoundingClientRect().width || 92);
+          const amp = 2.1, amp2 = 0.7, halo = 2.1;
+          const reach = Math.ceil(3 * halo + 2);
+          s.amp = amp; s.amp2 = amp2; s.halo = halo;
+          s.H = Math.ceil((amp + amp2) * 2 + reach * 2);
+          s.cv.style.height = s.H + 'px';
+          s.cv.width = s.W * s.D;
+          s.cv.height = s.H * s.D;
+          s.cx.setTransform(s.D, 0, 0, s.D, 0, 0);
+          const g = (a) => {
+            const gr = s.cx.createLinearGradient(0, 0, s.W, 0);
+            gr.addColorStop(0, `rgba(${TEAL},0)`);
+            gr.addColorStop(.22, `rgba(${TEAL},${a})`);
+            gr.addColorStop(.78, `rgba(${TEAL},${a})`);
+            gr.addColorStop(1, `rgba(${TEAL},0)`);
+            return gr;
+          };
+          s.G = [g(.13), g(.85)];
+          const n = Math.max(6, Math.round(s.W / 22));
+          while (s.P.length < n) s.P.push({ x: Math.random(), v: .05 + Math.random() * .035, r: 1.3 + Math.random() * 1.7, o: Math.random() });
+          if (s.P.length > n) s.P.length = n;
+        }
+      }
+      const yOf = (s, nx, t) => s.H * .5 + Math.sin(nx * 7.5 + t * .7) * s.amp + Math.sin(nx * 16 - t * .5) * s.amp2;
+      function paint(s, t, dt) {
+        const { cx, W, H, P } = s;
+        if (!RM) for (const p of P) { p.x += p.v * dt; if (p.x > 1.05) { p.x = -.05; p.o = Math.random(); } }
+        cx.clearRect(0, 0, W, H);
+        cx.beginPath();
+        for (let x = 0; x <= W; x += 4) { const y = yOf(s, x / W, t); x ? cx.lineTo(x, y) : cx.moveTo(x, y); }
+        cx.lineWidth = 7; cx.strokeStyle = s.G[0]; cx.lineCap = 'round'; cx.stroke();
+        cx.lineWidth = 1.5; cx.strokeStyle = s.G[1]; cx.stroke();
+        cx.globalCompositeOperation = 'lighter';
+        for (const p of P) {
+          const nx = p.x, x = nx * W, y = yOf(s, nx, t);
+          const e = nx < .22 ? nx / .22 : nx > .78 ? (1 - nx) / .22 : 1;
+          if (e <= 0) continue;
+          cx.fillStyle = `rgba(${TEAL},${.18 * e})`; cx.beginPath(); cx.arc(x, y, p.r * s.halo, 0, 6.283); cx.fill();
+          cx.fillStyle = `rgba(${TEAL},${.95 * e})`; cx.beginPath(); cx.arc(x, y, p.r, 0, 6.283); cx.fill();
+        }
+        cx.globalCompositeOperation = 'source-over';
+      }
+      let last = performance.now(), T0 = last;
+      function frame(ts) {
+        if (state.some((s) => s.W < 2)) sizeAll();
+        const dt = Math.min(.05, (ts - last) / 1000); last = ts;
+        const t = RM ? 1.2 : (ts - T0) / 1000;
+        for (const s of state) if (s.W > 1) paint(s, t, RM ? 0 : dt);
+        if (!RM) requestAnimationFrame(frame);
+      }
+      sizeAll();
+      addEventListener('resize', sizeAll);
+      if (document.fonts) document.fonts.ready.then(sizeAll);
+      requestAnimationFrame(frame);
+    })();
 
   </script>
 </body>
