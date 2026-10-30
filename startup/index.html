@@ -597,19 +597,19 @@
       color: #1a1a1a;
     }
 
-    .streamline-mark {
+    .flūevent-mark {
       align-items: center;
       display: flex;
       flex-direction: column;
     }
 
-    .streamline-mark img {
+    .flūevent-mark img {
       width: 68px;
       height: 68px;
       display: block;
     }
 
-    .streamline-mark .flu-name {
+    .flūevent-mark .flu-name {
       margin-top: 0.2rem;
       font-family: 'Space Grotesk', sans-serif;
       font-weight: 400;
@@ -619,7 +619,7 @@
       white-space: nowrap;
     }
 
-    .streamline-mark .flu {
+    .flūevent-mark .flu {
       color: rgba(255, 255, 255, .2);
       background: linear-gradient(180deg, rgba(255, 255, 255, .35), rgba(255, 255, 255, .08));
       -webkit-background-clip: text;
@@ -627,12 +627,12 @@
       -webkit-text-fill-color: transparent;
     }
 
-    .streamline-mark .event {
+    .flūevent-mark .event {
       color: #22d3ee;
       -webkit-text-fill-color: #22d3ee;
     }
 
-    body.light .streamline-mark .flu {
+    body.light .flūevent-mark .flu {
       color: rgba(26, 26, 26, .28);
       background: linear-gradient(180deg, rgba(26, 26, 26, .42), rgba(26, 26, 26, .1));
       -webkit-background-clip: text;
@@ -640,7 +640,7 @@
       -webkit-text-fill-color: transparent;
     }
 
-    .streamline-mark .streamline {
+    .flūevent-mark .flūevent {
       display: block;
       width: 100%;
       min-width: 92px;
@@ -688,12 +688,12 @@
         min-height: 70px;
       }
 
-      .streamline-mark img {
+      .flūevent-mark img {
         width: 46px;
         height: 46px;
       }
 
-      .streamline-mark .flu-name {
+      .flūevent-mark .flu-name {
         font-size: 1rem;
       }
 
@@ -1292,14 +1292,14 @@
             </div>
           </div>
           <div class="venture-item" data-domain="software" data-dev="in-development" data-stage="pre-seed">
-            <a href="https://business.briancrink.com/streamline" class="icon wordmark-link streamline-link"
-               data-light="../resources/images/icons/dark/streamline.png"
-               data-dark="../resources/images/icons/light/streamline.png"
+            <a href="https://business.briancrink.com/fluevent" class="icon wordmark-link flūevent-link"
+               data-light="../resources/images/icons/dark/flūevent.png"
+               data-dark="../resources/images/icons/light/flūevent.png"
                aria-label="flūevent">
-              <span class="wordmark streamline-mark">
-                <img src="../resources/images/icons/color/streamline.png" alt="" width="68" height="68">
+              <span class="wordmark flūevent-mark">
+                <img src="../resources/images/icons/color/flūevent.png" alt="" width="68" height="68">
                 <span class="flu-name"><span class="flu">flū</span><span class="event">event</span></span>
-                <canvas class="streamline" aria-hidden="true"></canvas>
+                <canvas class="flūevent" aria-hidden="true"></canvas>
               </span>
             </a>
             <div class="item-tags">
@@ -1732,7 +1732,7 @@
     (() => {
       const TEAL = '34,211,238';
       const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const lines = [...document.querySelectorAll('.streamline')];
+      const lines = [...document.querySelectorAll('.flūevent')];
       if (!lines.length) return;
       const state = lines.map((cv) => ({ cv, cx: cv.getContext('2d'), P: [], W: 0, H: 0, D: 1, G: null }));
       function sizeAll() {
