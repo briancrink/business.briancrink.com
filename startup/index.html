@@ -603,17 +603,24 @@
       flex-direction: column;
     }
 
+    .flūevent-mark .flu-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
     .flūevent-mark img {
-      width: 68px;
-      height: 68px;
+      width: 36px;
+      height: 36px;
       display: block;
+      flex-shrink: 0;
     }
 
     .flūevent-mark .flu-name {
-      margin-top: 0.2rem;
+      margin-top: 0;
       font-family: 'Space Grotesk', sans-serif;
-      font-weight: 400;
-      font-size: 1.15rem;
+      font-weight: 500;
+      font-size: 1.7rem;
       letter-spacing: 0;
       line-height: .88;
       white-space: nowrap;
@@ -643,9 +650,9 @@
     .flūevent-mark .flūevent {
       display: block;
       width: 100%;
-      min-width: 92px;
-      height: 24px;
-      margin-top: 1px;
+      min-width: 148px;
+      height: 28px;
+      margin-top: 2px;
       pointer-events: none;
     }
 
@@ -689,12 +696,12 @@
       }
 
       .flūevent-mark img {
-        width: 46px;
-        height: 46px;
+        width: 28px;
+        height: 28px;
       }
 
       .flūevent-mark .flu-name {
-        font-size: 1rem;
+        font-size: 1.65rem;
       }
 
       .tinyspace-mark .tinyspace-word {
@@ -1293,12 +1300,14 @@
           </div>
           <div class="venture-item" data-domain="software" data-dev="in-development" data-stage="pre-seed">
             <a href="https://business.briancrink.com/fluevent" class="icon wordmark-link flūevent-link"
-               data-light="../resources/images/icons/dark/flūevent_transparent.png"
-               data-dark="../resources/images/icons/light/flūevent_transparent.png"
+               data-light="../resources/images/icons/dark/flūevent.png"
+               data-dark="../resources/images/icons/light/flūevent.png"
                aria-label="flūevent">
               <span class="wordmark flūevent-mark">
-                <img src="../resources/images/icons/color/flūevent_transparent.png" alt="" width="68" height="68">
-                <span class="flu-name"><span class="flu">flū</span><span class="event">event</span></span>
+                <span class="flu-row">
+                  <span class="flu-name"><span class="flu">flū</span><span class="event">event</span></span>
+                  <img src="../resources/images/icons/color/flūevent.png" alt="" width="36" height="36">
+                </span>
                 <canvas class="flūevent" aria-hidden="true"></canvas>
               </span>
             </a>
@@ -1738,8 +1747,8 @@
       function sizeAll() {
         for (const s of state) {
           s.D = Math.min(devicePixelRatio || 1, 2);
-          s.W = Math.max(92, s.cv.clientWidth || s.cv.parentElement.getBoundingClientRect().width || 92);
-          const amp = 2.1, amp2 = 0.7, halo = 2.1;
+          s.W = Math.max(148, s.cv.clientWidth || s.cv.parentElement.getBoundingClientRect().width || 148);
+          const amp = 3.6, amp2 = 1.2, halo = 3.2;
           const reach = Math.ceil(3 * halo + 2);
           s.amp = amp; s.amp2 = amp2; s.halo = halo;
           s.H = Math.ceil((amp + amp2) * 2 + reach * 2);
@@ -1768,8 +1777,8 @@
         cx.clearRect(0, 0, W, H);
         cx.beginPath();
         for (let x = 0; x <= W; x += 4) { const y = yOf(s, x / W, t); x ? cx.lineTo(x, y) : cx.moveTo(x, y); }
-        cx.lineWidth = 7; cx.strokeStyle = s.G[0]; cx.lineCap = 'round'; cx.stroke();
-        cx.lineWidth = 1.5; cx.strokeStyle = s.G[1]; cx.stroke();
+        cx.lineWidth = 11; cx.strokeStyle = s.G[0]; cx.lineCap = 'round'; cx.stroke();
+        cx.lineWidth = 2.2; cx.strokeStyle = s.G[1]; cx.stroke();
         cx.globalCompositeOperation = 'lighter';
         for (const p of P) {
           const nx = p.x, x = nx * W, y = yOf(s, nx, t);
