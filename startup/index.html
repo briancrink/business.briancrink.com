@@ -656,6 +656,128 @@
       pointer-events: none;
     }
 
+    .minimaliste-mark {
+      align-items: flex-start;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #ecebe6;
+    }
+
+    .minimaliste-mark .min-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      line-height: 1;
+    }
+
+    .minimaliste-mark .min-icon {
+      width: 2em;
+      height: 2em;
+      flex-shrink: 0;
+      stroke: currentColor;
+      stroke-width: 1.5;
+    }
+
+    .minimaliste-mark .min-icon .face {
+      fill: none;
+    }
+
+    .minimaliste-mark .min-icon .face-on {
+      stroke: transparent;
+    }
+
+    @keyframes minPhysical {
+      0% { stroke: #86b6f2; }
+      8%, 36% { stroke: #86b6f2; }
+      54%, 86% { stroke: transparent; }
+      100% { stroke: #86b6f2; }
+    }
+
+    @keyframes minDigital {
+      0%, 16% { stroke: transparent; }
+      32%, 58% { stroke: #86cfa4; }
+      76%, 100% { stroke: transparent; }
+    }
+
+    @keyframes minMental {
+      0%, 40% { stroke: transparent; }
+      58%, 84% { stroke: #f5a6c8; }
+      100% { stroke: transparent; }
+    }
+
+    @media (min-width: 950px) {
+      .minimaliste-link:hover .min-icon .face-left { animation: minPhysical 4.8s ease-in-out infinite; }
+      .minimaliste-link:hover .min-icon .face-right { animation: minDigital 4.8s ease-in-out infinite; }
+      .minimaliste-link:hover .min-icon .face-bottom { animation: minMental 4.8s ease-in-out infinite; }
+    }
+
+    @media (max-width: 949px) {
+      .minimaliste-link .min-icon .face-left { animation: minPhysical 4.8s ease-in-out infinite; }
+      .minimaliste-link .min-icon .face-right { animation: minDigital 4.8s ease-in-out infinite; }
+      .minimaliste-link .min-icon .face-bottom { animation: minMental 4.8s ease-in-out infinite; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .minimaliste-link:hover .min-icon .face,
+      .minimaliste-link .min-icon .face { animation: none; }
+    }
+
+    .minimaliste-mark .min-name {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .minimaliste-mark .min-word {
+      font-size: 0.95rem;
+      line-height: 1;
+      letter-spacing: 0.15em;
+      color: #9bb5a5;
+    }
+
+    @keyframes minWordTravel {
+      0%, 22% { color: #86b6f2; }
+      40%, 52% { color: #86cfa4; }
+      68%, 82% { color: #f5a6c8; }
+      100% { color: #86b6f2; }
+    }
+
+    @media (min-width: 950px) {
+      .minimaliste-link:hover .min-word,
+      body.light .minimaliste-link:hover .min-word { animation: minWordTravel 4.8s ease-in-out infinite; }
+    }
+
+    @media (max-width: 949px) {
+      .minimaliste-link .min-word,
+      body.light .minimaliste-link .min-word { animation: minWordTravel 4.8s ease-in-out infinite; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .minimaliste-link:hover .min-word,
+      .minimaliste-link .min-word { animation: none; }
+    }
+
+    .minimaliste-mark .min-sub {
+      font-size: 0.95rem;
+      letter-spacing: 0.18em;
+      margin-top: 0.28rem;
+      color: #ffffff;
+    }
+
+    body.light .minimaliste-mark {
+      color: #1c1c1a;
+    }
+
+    body.light .minimaliste-mark .min-word {
+      color: #587866;
+    }
+
+    body.light .minimaliste-mark .min-sub {
+      color: #1a1a1a;
+    }
+
     .tinyspace-mark {
       align-items: center;
     }
@@ -1363,6 +1485,31 @@
               <span class="wordmark cafeanya-mark">
                 <span class="wordmark-top cafe-word">CAFÉ</span>
                 <span class="wordmark-bottom anya-word">ANYA</span>
+              </span>
+            </a>
+            <div class="item-tags">
+              <span class="domain-pill item-domain" data-domain="lifestyle">Lifestyle</span>
+              <span class="dev-pill item-dev" data-dev="planned">Planned</span>
+              <span class="stage-pill item-stage" data-stage="pre-seed">Pre-seed</span>
+            </div>
+          </div>
+          <div class="venture-item" data-domain="lifestyle" data-dev="planned" data-stage="pre-seed">
+            <a href="https://business.briancrink.com/minimaliste" class="icon wordmark-link minimaliste-link" aria-label="MINIMALISTÉ ASSISTANT">
+              <span class="wordmark minimaliste-mark">
+                <span class="min-row">
+                  <svg class="min-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path class="face" d="M12 2.15L1.85 7.2v10.1L12 12.25z"/>
+                    <path class="face" d="M12 2.15l10.15 5.05v10.1L12 12.25z"/>
+                    <path class="face" d="M1.85 17.3L12 22.35l10.15-5.05L12 12.25z"/>
+                    <path class="face face-on face-left" d="M12 2.15L1.85 7.2v10.1L12 12.25z"/>
+                    <path class="face face-on face-right" d="M12 2.15l10.15 5.05v10.1L12 12.25z"/>
+                    <path class="face face-on face-bottom" d="M1.85 17.3L12 22.35l10.15-5.05L12 12.25z"/>
+                  </svg>
+                  <span class="min-name">
+                    <span class="min-word">MINIMALISTÉ</span>
+                    <span class="min-sub">ASSISTANT</span>
+                  </span>
+                </span>
               </span>
             </a>
             <div class="item-tags">
