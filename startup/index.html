@@ -351,6 +351,10 @@
 
     /* Desktop (950px and up): loop only while hovering */
     @media (min-width: 950px) {
+      .store-mark {
+        font-size: 1.85rem;
+      }
+
       .store-link:hover {
         opacity: 1;
       }
@@ -673,11 +677,18 @@
     }
 
     .minimaliste-mark .min-icon {
-      width: 2em;
-      height: 2em;
+      width: 48px;
+      height: 48px;
       flex-shrink: 0;
       stroke: currentColor;
       stroke-width: 1.5;
+    }
+
+    @media (min-width: 950px) {
+      .minimaliste-mark .min-icon {
+        width: 48px;
+        height: 48px;
+      }
     }
 
     .minimaliste-mark .min-icon .face {
