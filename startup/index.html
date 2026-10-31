@@ -1947,13 +1947,24 @@
         }
         cx.globalCompositeOperation = 'source-over';
       }
-      let last = performance.now(), T0 = last;
+      let last = performance.now(), elapsed = 0, speed = 0, hovering = false;
+      const link = document.querySelector('.flūevent-link');
+      const isDesktop = () => window.innerWidth >= 950;
+      if (link) {
+        link.addEventListener('mouseenter', () => { hovering = true; });
+        link.addEventListener('mouseleave', () => { hovering = false; });
+      }
       function frame(ts) {
         if (state.some((s) => s.W < 2)) sizeAll();
         const dt = Math.min(.05, (ts - last) / 1000); last = ts;
-        const t = RM ? 1.2 : (ts - T0) / 1000;
-        for (const s of state) if (s.W > 1) paint(s, t, RM ? 0 : dt);
-        if (!RM) requestAnimationFrame(frame);
+        const playing = !RM && (!isDesktop() || hovering || (link && link.matches(':hover')));
+        const target = playing ? 1 : 0;
+        speed += (target - speed) * Math.min(1, dt * 2.2);
+        if (!playing && speed < 0.01) speed = 0;
+        elapsed += dt * speed;
+        const t = elapsed;
+        for (const s of state) if (s.W > 1) paint(s, t, dt * speed);
+        requestAnimationFrame(frame);
       }
       sizeAll();
       addEventListener('resize', sizeAll);
