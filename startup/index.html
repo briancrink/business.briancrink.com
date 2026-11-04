@@ -693,10 +693,9 @@
 
 
     /* LovingPals: logo + wordmark.
-       Dark mode: white. Light mode: --lp-light-color (set this to the exact color used on breeders.lovingpals.com).
+       Default (not hovered): the finished, colored lockup. Hover (desktop) / always (mobile): the build-up animation.
        --lp-font / --lp-weight / --lp-size should match the wordmark on breeders.lovingpals.com. */
     :root {
-      --lp-light-color: #1a1a1a; /* TODO: replace with breeders.lovingpals.com text/logo color */
       --lp-font: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; /* TODO: match breeders.lovingpals.com */
       --lp-weight: 600;
       --lp-size: 1.7rem;
@@ -704,9 +703,7 @@
 
     .lovingpals-mark {
       align-items: center;
-      color: #ffffff;
-      /* Dark mode animation colors: orange tabby cat (white muzzle + chest), light-brown dog (white muzzle + chest),
-         pink "Loving", orange "Pals" */
+      /* Dark theme: orange tabby cat, light-brown dog (both with white muzzle + chest), pink heart, pink "Loving", orange "Pals" */
       --lp-cat-orange: #f0913a;
       --lp-cat-stripe: #c4621a;
       --lp-cat-white: #ffffff;
@@ -719,6 +716,26 @@
       --lp-heart-c: #ff4f8b;
       --lp-loving-c: #ff8fb1;
       --lp-pals-c: #ffa24a;
+    }
+
+    /* Light theme: same colors, deepened so they hold up on white (cream replaces white, soft outline defines the edges) */
+    body.light .lovingpals-mark {
+      --lp-cat-orange: #ea8a2c;
+      --lp-cat-stripe: #bf5d17;
+      --lp-cat-white: #fff3e2;
+      --lp-cat-nose: #e98a93;
+      --lp-dog-brown: #bf9060;
+      --lp-dog-ear: #9c6f42;
+      --lp-dog-white: #fff3e2;
+      --lp-dog-nose: #3b2a20;
+      --lp-dog-eye: #2b1d15;
+      --lp-heart-c: #f0457f;
+      --lp-loving-c: #e0457f;
+      --lp-pals-c: #dc6f0a;
+    }
+
+    body.light .lovingpals-mark .lp-logo {
+      filter: drop-shadow(0 0 0.6px rgba(70, 45, 20, 0.6));
     }
 
     .lovingpals-mark .lp-row {
@@ -734,66 +751,47 @@
       aspect-ratio: 594.22 / 506.6;
       display: block;
       flex-shrink: 0;
-      color: inherit;
     }
 
     .lovingpals-mark .lp-name {
+      display: inline-flex;
       font-family: var(--lp-font);
       font-weight: var(--lp-weight);
       font-size: var(--lp-size);
       letter-spacing: 0;
       line-height: 1;
       white-space: nowrap;
-      color: inherit;
     }
 
-    body.light .lovingpals-mark {
-      color: var(--lp-light-color);
-      --lp-cat-orange: var(--lp-light-color);
-      --lp-cat-stripe: var(--lp-light-color);
-      --lp-cat-white: var(--lp-light-color);
-      --lp-cat-nose: var(--lp-light-color);
-      --lp-dog-brown: var(--lp-light-color);
-      --lp-dog-ear: var(--lp-light-color);
-      --lp-dog-white: var(--lp-light-color);
-      --lp-dog-nose: var(--lp-light-color);
-      --lp-dog-eye: var(--lp-light-color);
-      --lp-heart-c: transparent; /* set to a pink (e.g. #ff4f8b) to show the heart in light mode too */
-      --lp-loving-c: var(--lp-light-color);
-      --lp-pals-c: var(--lp-light-color);
-    }
-
-    .lovingpals-mark .lp-name {
-      display: inline-flex;
-    }
+    .lovingpals-mark .lp-loving { color: var(--lp-loving-c); }
 
     .lovingpals-mark .lp-pals {
       display: inline-block;
+      color: var(--lp-pals-c);
       will-change: opacity, transform;
     }
 
-    /* Cat fades in, the dog follows while the cat is still mid-fade, and the wordmark arrives with them:
-       "Loving" and "Pals" fade in together while "Pals" glides left to join "Loving".
-       Everything holds (the pause), fades out together, then the cycle restarts. */
-    /* Two-tone artwork. Outside the animation every part falls back to currentColor (plain one-color logo). */
-    .lovingpals-mark .lp-t-cat-base { fill: var(--lpf-cat-base, currentColor); }
-    .lovingpals-mark .lp-t-cat-white { fill: var(--lpf-cat-white, currentColor); }
-    .lovingpals-mark .lp-t-cat-stripe { stroke: var(--lpf-cat-stripe, currentColor); }
-    .lovingpals-mark .lp-t-cat-nose { fill: var(--lpf-cat-nose, currentColor); }
-    .lovingpals-mark .lp-t-dog-base { fill: var(--lpf-dog-base, currentColor); }
-    .lovingpals-mark .lp-t-dog-ear { fill: var(--lpf-dog-ear, currentColor); }
-    .lovingpals-mark .lp-t-dog-white { fill: var(--lpf-dog-white, currentColor); }
-    .lovingpals-mark .lp-t-dog-nose { fill: var(--lpf-dog-nose, currentColor); }
-    .lovingpals-mark .lp-t-dog-eye { fill: var(--lpf-dog-eye, currentColor); }
+    /* Artwork colors (always on) */
+    .lovingpals-mark .lp-t-cat-base { fill: var(--lp-cat-orange); }
+    .lovingpals-mark .lp-t-cat-white { fill: var(--lp-cat-white); }
+    .lovingpals-mark .lp-t-cat-stripe { stroke: var(--lp-cat-stripe); }
+    .lovingpals-mark .lp-t-cat-nose { fill: var(--lp-cat-nose); }
+    .lovingpals-mark .lp-t-dog-base { fill: var(--lp-dog-brown); }
+    .lovingpals-mark .lp-t-dog-ear { fill: var(--lp-dog-ear); }
+    .lovingpals-mark .lp-t-dog-white { fill: var(--lp-dog-white); }
+    .lovingpals-mark .lp-t-dog-nose { fill: var(--lp-dog-nose); }
+    .lovingpals-mark .lp-t-dog-eye { fill: var(--lp-dog-eye); }
 
-    /* Pink heart that fills the gap between the cat and dog. Hidden unless the animation is running. */
+    /* Pink heart filling the gap between the cat and dog */
     .lovingpals-mark .lp-heart {
       fill: var(--lp-heart-c);
-      opacity: 0;
       transform-box: fill-box;
       transform-origin: 50% 45%;
     }
 
+    /* Build-up animation: cat fades in, the dog follows while the cat is still mid-fade, the wordmark arrives
+       ("Loving" and "Pals" fade in together while "Pals" glides left to join "Loving"), the heart blooms into the gap,
+       everything holds (the pause), fades out together, then the cycle restarts. */
     @keyframes lpCat {
       0%, 2% { opacity: 0; }
       16% { opacity: 1; }
@@ -832,48 +830,32 @@
       96%, 100% { opacity: 0; transform: scale(1); }
     }
 
-    /* Desktop: loops while hovered */
+    /* Desktop: finished lockup by default, animation loops while hovered */
     @media (min-width: 950px) {
-      .lovingpals-link:hover .lp-logo { --lpf-cat-base: var(--lp-cat-orange); --lpf-cat-white: var(--lp-cat-white); --lpf-cat-stripe: var(--lp-cat-stripe); --lpf-cat-nose: var(--lp-cat-nose); --lpf-dog-base: var(--lp-dog-brown); --lpf-dog-ear: var(--lp-dog-ear); --lpf-dog-white: var(--lp-dog-white); --lpf-dog-nose: var(--lp-dog-nose); --lpf-dog-eye: var(--lp-dog-eye); }
       .lovingpals-link:hover .lp-cat { animation: lpCat 5.2s ease-in-out infinite; }
       .lovingpals-link:hover .lp-dog { animation: lpDog 5.2s ease-in-out infinite; }
       .lovingpals-link:hover .lp-heart { animation: lpHeart 5.2s ease-in-out infinite; }
-      .lovingpals-link:hover .lp-loving { color: var(--lp-loving-c); animation: lpLoving 5.2s ease-in-out infinite; }
-      .lovingpals-link:hover .lp-pals { color: var(--lp-pals-c); animation: lpPals 5.2s ease-in-out infinite; }
+      .lovingpals-link:hover .lp-loving { animation: lpLoving 5.2s ease-in-out infinite; }
+      .lovingpals-link:hover .lp-pals { animation: lpPals 5.2s ease-in-out infinite; }
     }
 
-    /* Mobile: no hover, so it loops by default */
+    /* Mobile: no hover, so the animation loops all the time */
     @media (max-width: 949px) {
       .lovingpals-mark .lp-logo { height: 2.1rem; }
-      .lovingpals-mark .lp-logo { --lpf-cat-base: var(--lp-cat-orange); --lpf-cat-white: var(--lp-cat-white); --lpf-cat-stripe: var(--lp-cat-stripe); --lpf-cat-nose: var(--lp-cat-nose); --lpf-dog-base: var(--lp-dog-brown); --lpf-dog-ear: var(--lp-dog-ear); --lpf-dog-white: var(--lp-dog-white); --lpf-dog-nose: var(--lp-dog-nose); --lpf-dog-eye: var(--lp-dog-eye); }
       .lovingpals-mark .lp-cat { animation: lpCat 5.2s ease-in-out infinite; }
       .lovingpals-mark .lp-dog { animation: lpDog 5.2s ease-in-out infinite; }
       .lovingpals-mark .lp-heart { animation: lpHeart 5.2s ease-in-out infinite; }
-      .lovingpals-mark .lp-loving { color: var(--lp-loving-c); animation: lpLoving 5.2s ease-in-out infinite; }
-      .lovingpals-mark .lp-pals { color: var(--lp-pals-c); animation: lpPals 5.2s ease-in-out infinite; }
+      .lovingpals-mark .lp-loving { animation: lpLoving 5.2s ease-in-out infinite; }
+      .lovingpals-mark .lp-pals { animation: lpPals 5.2s ease-in-out infinite; }
 
       .lovingpals-mark .lp-name { font-size: 1.35rem; }
     }
 
-    @media (prefers-reduced-motion: reduce) and (min-width: 950px) {
-      .lovingpals-link:hover .lp-heart { animation: none; opacity: 1; transform: none; }
-    }
-
-    @media (prefers-reduced-motion: reduce) and (max-width: 949px) {
-      .lovingpals-mark .lp-heart { animation: none; opacity: 1; transform: none; }
-    }
-
     @media (prefers-reduced-motion: reduce) {
-      .lovingpals-link:hover .lp-cat,
-      .lovingpals-link:hover .lp-dog,
-      .lovingpals-mark .lp-cat,
-      .lovingpals-mark .lp-dog { animation: none; opacity: 1; }
-
-      .lovingpals-link:hover .lp-loving,
-      .lovingpals-mark .lp-loving { animation: none; opacity: 1; }
-
-      .lovingpals-link:hover .lp-pals,
-      .lovingpals-mark .lp-pals { animation: none; opacity: 1; transform: none; }
+      .lovingpals-link:hover .lp-cat, .lovingpals-link:hover .lp-dog, .lovingpals-link:hover .lp-heart,
+      .lovingpals-link:hover .lp-loving, .lovingpals-link:hover .lp-pals,
+      .lovingpals-mark .lp-cat, .lovingpals-mark .lp-dog, .lovingpals-mark .lp-heart,
+      .lovingpals-mark .lp-loving, .lovingpals-mark .lp-pals { animation: none; opacity: 1; transform: none; }
     }
 
     .minimaliste-mark {
